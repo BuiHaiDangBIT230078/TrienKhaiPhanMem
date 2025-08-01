@@ -73,6 +73,12 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+    <groupId>org.junit.jupiter</groupId>
+    <artifactId>junit-jupiter-engine</artifactId>
+    <version>5.10.0</version>
+    <scope>test</scope>
+  </dependency>
 	</dependencies>
 	<build>
 		<defaultGoal>install</defaultGoal>
@@ -101,6 +107,11 @@
     <artifactId>depgraph-maven-plugin</artifactId>
     <version>4.0.1</version>
 </plugin>
+<plugin>
+      <groupId>org.apache.maven.plugins</groupId>
+      <artifactId>maven-surefire-plugin</artifactId>
+      <version>3.2.2</version>
+    </plugin>
 		</plugins>
 	</build>
 </project>
