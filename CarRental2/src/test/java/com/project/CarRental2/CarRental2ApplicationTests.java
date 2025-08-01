@@ -1,4 +1,4 @@
-package com.example.CarRental2;
+package com.project.CarRental2;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +29,6 @@ class HomePageControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
-    // Mock all autowired services to avoid null errors
     @MockBean
     private UserService userService;
 
