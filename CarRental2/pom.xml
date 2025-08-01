@@ -33,12 +33,8 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
         </dependency>
-        <!-- Xóa dependency AppleJavaExtensions vì không cần thiết -->
-        <!-- <dependency>
-            <groupId>com.apple</groupId>
-            <artifactId>AppleJavaExtensions</artifactId>
-            <version>1.4</version>
-        </dependency> -->
+        <!-- Xóa dependency AppleJavaExtensions vì không cần thiết và có thể gây lỗi trên non-Mac -->
+        <!-- <dependency> <groupId>com.apple</groupId> <artifactId>AppleJavaExtensions</artifactId> <version>1.4</version> </dependency> -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
@@ -73,19 +69,16 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+        <!-- Thêm H2 cho test để sử dụng in-memory database, tránh lỗi kết nối SQL Server thực -->
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
-
     <build>
         <defaultGoal>install</defaultGoal>
         <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>3.2.2</version>
-                <configuration>
-                    <skipTests>false</skipTests>
-                </configuration>
-            </plugin>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
@@ -98,17 +91,20 @@
                     </excludes>
                 </configuration>
             </plugin>
-            <!-- Xóa plugin depgraph-maven-plugin nếu không cần -->
+            <!-- Giữ chỉ một maven-surefire-plugin, xóa dư thừa để tránh xung đột -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.2.2</version>
+                <configuration>
+                    <skipTests>false</skipTests>  <!-- Đảm bảo không skip -->
+                </configuration>
+            </plugin>
+            <!-- Xóa depgraph-maven-plugin nếu không cần, để tránh lỗi -->
             <!-- <plugin>
                 <groupId>com.github.ferstl</groupId>
                 <artifactId>depgraph-maven-plugin</artifactId>
                 <version>4.0.1</version>
-            </plugin> -->
-            <!-- Xóa maven-failsafe-plugin nếu không dùng integration test -->
-            <!-- <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-failsafe-plugin</artifactId>
-                <version>3.2.2</version>
             </plugin> -->
         </plugins>
     </build>
