@@ -2,9 +2,10 @@ package com.project.CarRental2.controller;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.context.annotation.Import;
 import org.springframework.test.web.servlet.MockMvc;
 
 import com.project.CarRental2.CarRental2Application;
@@ -20,18 +21,20 @@ import com.project.CarRental2.service.ProvinceService;
 import com.project.CarRental2.service.RequestWithdrawalService;
 import com.project.CarRental2.service.UserService;
 
+import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration;
+
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
 @WebMvcTest(HomePageController.class)
-@Import(CarRental2Application.class)  // Chỉ định class chính để khởi tạo context cơ bản
+@EnableAutoConfiguration(exclude = {SecurityAutoConfiguration.class, HibernateJpaAutoConfiguration.class})  // Loại bỏ Security và JPA auto-config
 class HomePageControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
 
-    // Mock tất cả các service được autowired trong controller
+    // Mock tất cả service để tránh lỗi khởi tạo
     @MockBean
     private UserService userService;
 
