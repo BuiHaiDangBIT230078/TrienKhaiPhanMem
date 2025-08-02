@@ -19,11 +19,11 @@ jobs:
           distribution: "temurin"
           cache: maven
       - name: Build and Test with Maven
-        run: mvn -B -e clean test --file CarRental2/pom.xml # Xóa -X để giảm log, giữ -e cho stack trace
+        run: mvn -B -e clean test --file CarRental2/pom.xml
       - name: Upload Surefire Reports
-        if: always() # Upload luôn để xem báo cáo, kể cả thành công
+        if: always() # Upload cả khi thành công/thất bại
         uses: actions/upload-artifact@v4
         with:
           name: surefire-reports
           path: CarRental2/target/surefire-reports/
-          retention-days: 5 # Giữ artifact 5 ngày
+          retention-days: 5
