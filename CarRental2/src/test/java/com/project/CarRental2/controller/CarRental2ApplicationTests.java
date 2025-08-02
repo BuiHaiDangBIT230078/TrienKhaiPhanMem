@@ -16,6 +16,7 @@ class HomePageControllerTest {
     private MockMvc mockMvc;
 
     @Test // Annotation @Test để đánh dấu phương thức test
+    //
     void testHomePage() throws Exception {
         mockMvc.perform(get("/"))
                 .andExpect(status().isOk())
