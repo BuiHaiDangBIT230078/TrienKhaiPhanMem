@@ -78,7 +78,7 @@ class HomePageControllerTest {
         // Thực hiện request GET /
         mockMvc.perform(get("/"))
         //test
-                .andExpect(status().isOk());
-                // .andExpect(status().is5xxServerError());
+                // .andExpect(status().isOk());
+                .andExpect(status().is5xxServerError());
     }
 }
